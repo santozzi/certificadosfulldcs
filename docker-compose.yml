@@ -17,7 +17,7 @@ services:
     networks:
       - my-network
     environment:
-      VITE_API_URL: /api  # Pedís al proxy en /api, no directo al backend
+      VITE_API_URL: /api
 
   nginx:
     image: nginx:latest
@@ -29,6 +29,7 @@ services:
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./letsencrypt:/etc/letsencrypt
+      - ./webroot:/var/www/html  # Mapeo del directorio webroot
     networks:
       - my-network
     depends_on:
@@ -40,7 +41,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./letsencrypt:/etc/letsencrypt
-      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./webroot:/var/www/html  # Mapeo del mismo directorio para Certbot
     command: >
       certonly --webroot
       --webroot-path=/var/www/html
