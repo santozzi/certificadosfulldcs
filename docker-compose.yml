@@ -44,7 +44,7 @@ services:
     entrypoint: >
       sh -c "certbot certonly --webroot
              --webroot-path=/var/www/html
-             --email tu-correo@uns.edu.ar --agree-tos --no-eff-email
+             --email sergio.antozzi@uns.edu.ar --agree-tos --no-eff-email
              -d server.cienciasdelasalud.uns.edu.ar"
 
 networks:
