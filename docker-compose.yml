@@ -1,27 +1,52 @@
 services:
   backend:
-    build: ./backend # Path to your backend folder
+    build: ./backend
     restart: always
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     networks:
       - my-network
     environment:
-      # Use the service name defined in docker-compose.yml as the hostname
-      # You can replace this with your actual environment variables
       NODE_ENV: production
 
   frontend:
-    build: ./frontend # Path to your frontend folder
+    build: ./frontend
     restart: always
-    ports:
-      - "80:80"
+    expose:
+      - "80"
     networks:
       - my-network
     environment:
-      # Replace this with your actual API URL from the frontend's .env file or configuration
-      VITE_API_URL: http://backend:3000 # Use the service name "backend" and its exposed port
-    
+      VITE_API_URL: /api  # Pedís al proxy en /api, no directo al backend
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx-proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./letsencrypt:/etc/letsencrypt
+    networks:
+      - my-network
+    depends_on:
+      - frontend
+      - backend
+
+  certbot:
+    image: certbot/certbot
+    restart: unless-stopped
+    volumes:
+      - ./letsencrypt:/etc/letsencrypt
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    entrypoint: >
+      sh -c "certbot certonly --webroot
+             --webroot-path=/var/www/html
+             --email tu-correo@uns.edu.ar --agree-tos --no-eff-email
+             -d server.cienciasdelasalud.uns.edu.ar"
+
 networks:
   my-network:
     driver: bridge
