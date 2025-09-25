@@ -1,0 +1,27 @@
+services:
+  backend:
+    build: ./backend # Path to your backend folder
+    restart: always
+    ports:
+      - "3000:3000"
+    networks:
+      - my-network
+    environment:
+      # Use the service name defined in docker-compose.yml as the hostname
+      # You can replace this with your actual environment variables
+      NODE_ENV: production
+
+  frontend:
+    build: ./frontend # Path to your frontend folder
+    restart: always
+    ports:
+      - "80:80"
+    networks:
+      - my-network
+    environment:
+      # Replace this with your actual API URL from the frontend's .env file or configuration
+      VITE_API_URL: http://backend:3001 # Use the service name "backend" and its exposed port
+    
+networks:
+  my-network:
+    driver: bridge
