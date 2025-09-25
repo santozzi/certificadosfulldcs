@@ -6,11 +6,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN apt-get update \
-&& apt-get install -y --no-install-recommends nano openssl \
-&& apt-get install certbot -y \
-&& apt-get install python3-certbot-nginx -y \
-&& rm -rf /var/lib/apt/lists/*
+
 RUN npm run build
 
 # Serve phase
