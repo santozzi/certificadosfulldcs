@@ -36,20 +36,20 @@ services:
       - frontend
       - backend
 
-  certbot:
-    image: certbot/certbot
-    restart: unless-stopped
-    volumes:
-      - ./letsencrypt:/etc/letsencrypt
-      - ./webroot:/var/www/html  # Mapeo del mismo directorio para Certbot
-    command: >
-      certonly --webroot
-      --webroot-path=/var/www/html
-      --email sergio.antozzi@uns.edu.ar
-      --agree-tos
-      --no-eff-email
-      --non-interactive
-      -d server.cienciasdelasalud.uns.edu.ar
+  # certbot:
+  #   image: certbot/certbot
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ./letsencrypt:/etc/letsencrypt
+  #     - ./webroot:/var/www/html  # Mapeo del mismo directorio para Certbot
+  #   command: >
+  #     certonly --webroot
+  #     --webroot-path=/var/www/html
+  #     --email sergio.antozzi@uns.edu.ar
+  #     --agree-tos
+  #     --no-eff-email
+  #     --non-interactive
+  #     -d server.cienciasdelasalud.uns.edu.ar
 
 networks:
   my-network:
