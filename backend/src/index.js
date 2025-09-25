@@ -63,7 +63,7 @@ getGoogleSheet("")
     const datos = convertirAObjetos([["nombre","apellido","dni","email"],...table])
     datos.forEach((participante)=>{
        const  {nombre,apellido,dni,email} = participante;
-       participanteModel.create(nombre,apellido,email,limpiarDni(dni));
+       participanteModel.create(nombre,apellido,email,limpiarDni(dni) );
     });
     //console.log("📊 Datos de la hoja:", datos.find(participante=>participante.dni==="44.881.127"));
     participanteModel.list().then(participantes=>console.log(participantes))
