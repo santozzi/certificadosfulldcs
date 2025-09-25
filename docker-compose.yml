@@ -20,7 +20,7 @@ services:
       - my-network
     environment:
       # Replace this with your actual API URL from the frontend's .env file or configuration
-      VITE_API_URL: http://backend:3001 # Use the service name "backend" and its exposed port
+      VITE_API_URL: http://backend:3000 # Use the service name "backend" and its exposed port
     
 networks:
   my-network:

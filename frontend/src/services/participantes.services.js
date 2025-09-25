@@ -1,5 +1,5 @@
 // src/services/participanteService.js
-const API_URL = "http://server.cienciasdelasalud.uns.edu.ar:3000"; // base URL
+const API_URL = import.meta.env.VITE_API_URL; // base URL
 
 export async function obtenerParticipantes() {
   const res = await fetch(`${API_URL}/participantes`);
