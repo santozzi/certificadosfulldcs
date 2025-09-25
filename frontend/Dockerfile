@@ -11,13 +11,13 @@ RUN apt-get update \
 
 # Config Nginx
 RUN mkdir -p /etc/letsencrypt/
-COPY default.conf /etc/nginx/conf.d/default.conf
+# COPY default.conf /etc/nginx/conf.d/default.conf
 
 
-COPY certificados/fullchain.pem /etc/nginx/fullchain.pem
-COPY certificados/privkey.pem /etc/nginx/privkey.pem
-COPY certificados/options-ssl-nginx.conf /etc/nginx/options-ssl-nginx.conf
-COPY certificados/ssl-dhparams.pem /etc/nginx/ssl-dhparams.pem
+# COPY certificados/fullchain.pem /etc/nginx/fullchain.pem
+# COPY certificados/privkey.pem /etc/nginx/privkey.pem
+# COPY certificados/options-ssl-nginx.conf /etc/nginx/options-ssl-nginx.conf
+# COPY certificados/ssl-dhparams.pem /etc/nginx/ssl-dhparams.pem
 
 
 # Cert autofirmado (dev)
