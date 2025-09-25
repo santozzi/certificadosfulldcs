@@ -69,4 +69,5 @@ getGoogleSheet("")
     participanteModel.list().then(participantes=>console.log(participantes))
   });
 }
+
 export { socketManager }; // Exportar para usar en otros módulos
