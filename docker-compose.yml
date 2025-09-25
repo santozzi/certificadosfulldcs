@@ -41,11 +41,14 @@ services:
     volumes:
       - ./letsencrypt:/etc/letsencrypt
       - ./nginx/conf.d:/etc/nginx/conf.d
-    entrypoint: >
-      sh -c "certbot certonly --webroot
-             --webroot-path=/var/www/html
-             --email sergio.antozzi@uns.edu.ar --agree-tos --no-eff-email
-             -d server.cienciasdelasalud.uns.edu.ar"
+    command: >
+      certonly --webroot
+      --webroot-path=/var/www/html
+      --email sergio.antozzi@uns.edu.ar
+      --agree-tos
+      --no-eff-email
+      --non-interactive
+      -d server.cienciasdelasalud.uns.edu.ar
 
 networks:
   my-network:
