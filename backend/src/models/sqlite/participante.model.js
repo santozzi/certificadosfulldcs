@@ -32,7 +32,7 @@ async presente(dni){
   console.log(participante);
   
     if(!participante){
-      this.create("Hola,","presente!!","buscar",dni,true)
+      this.create("Hola,","presente!!","buscar",dni,true) 
    
   }
   participante.presente = true;
