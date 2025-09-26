@@ -8,7 +8,7 @@ class ParticipanteModel {
   }
 
 
-create(nombre,apellido,email,dni){
+create(nombre,apellido,email,dni,presente=false){
    //email unico
 
 
@@ -17,7 +17,7 @@ create(nombre,apellido,email,dni){
     apellido,
     email,
     dni,
-    presente:false
+    presente
   });
 }
 findByID(dni){ 
@@ -32,7 +32,8 @@ async presente(dni){
   console.log(participante);
   
     if(!participante){
-    throw new Error("el dni no existe")
+      this.create("Hola,","presente!!","buscar",dni,true)
+   
   }
   participante.presente = true;
   await participante.save();
