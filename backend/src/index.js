@@ -38,7 +38,7 @@ async function getGoogleSheet(sheetId) {
   try {
     const response = await mysheet.spreadsheets.values.get({
       spreadsheetId: sheetId,
-      range: 'Form responses!A2:D10', // ajusta el rango según tu hoja
+      range: 'Form responses!A2:D171', // ajusta el rango según tu hoja
     });
 
     return response.data.values || []; // devuelve las filas
@@ -58,16 +58,22 @@ httpServer.listen(3000, () => {
   console.log(`✅ Servidor en http://localhost:3000`);
 });
 function cargarDatosDeSheets(){
-getGoogleSheet("")
+getGoogleSheet("1QHmLHXrA3dptqLPEONYz4sbjoH70WAFL1huPjLFRycc")
   .then(table => {
     const datos = convertirAObjetos([["nombre","apellido","dni","email"],...table])
     datos.forEach((participante)=>{
        const  {nombre,apellido,dni,email} = participante;
-       participanteModel.create(nombre,apellido,email,limpiarDni(dni) );
+       try{
+         participanteModel.create(nombre,apellido,email,limpiarDni(dni) );
+       }catch(error){
+         console.log(error.message);
+         
+       }
+      
     });
     //console.log("📊 Datos de la hoja:", datos.find(participante=>participante.dni==="44.881.127"));
     participanteModel.list().then(participantes=>console.log(participantes))
   });
 }
-
+cargarDatosDeSheets()
 export { socketManager }; // Exportar para usar en otros módulos
