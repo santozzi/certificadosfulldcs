@@ -75,5 +75,5 @@ getGoogleSheet("1QHmLHXrA3dptqLPEONYz4sbjoH70WAFL1huPjLFRycc")
     participanteModel.list().then(participantes=>console.log(participantes))
   });
 }
-cargarDatosDeSheets()
+
 export { socketManager }; // Exportar para usar en otros módulos
